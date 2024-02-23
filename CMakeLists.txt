@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 11) #
 
 add_executable(MyProjectLab4 
 main.cpp 
-InputReader.cpp)
+InputReader.cpp
+Painter.cpp)

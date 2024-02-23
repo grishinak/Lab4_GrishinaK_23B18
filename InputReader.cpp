@@ -1,4 +1,4 @@
-#include "InputReader.hpp"
+#include "InputReader.h"
 
 InputReader::InputReader() {
     std::ifstream inputFile("input.txt");  // открытие файла с исходными данными
