@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+
+##build cmake
+build/
+   
 # User-specific files
 *.rsuser
 *.suo
@@ -17,6 +21,7 @@
 mono_crash.*
 
 # Build results
+
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
