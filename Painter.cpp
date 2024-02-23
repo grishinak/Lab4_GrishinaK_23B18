@@ -1,4 +1,5 @@
 #include "Painter.h"
+#include <cmath>
 
 Painter::Painter(std::uint32_t width, std::uint32_t height) {
     header.type = 0x4D42; // "BM"
@@ -27,6 +28,34 @@ void Painter::setPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::ui
         pixels[index] = b;
         pixels[index + 1] = g;
         pixels[index + 2] = r;
+    }
+}
+
+void Painter::drawCircle(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
+        const int radius = 5; // половина диаметра
+        for (int i = x - radius; i <= x + radius; ++i) {
+            for (int j = y - radius; j <= y + radius; ++j) {
+                if (std::sqrt((i - x) * (i - x) + (j - y) * (j - y)) <= radius) {
+                    setPixel(i, j, r, g, b);
+                }
+            }
+        }
+    }
+
+void Painter::drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2,
+                       std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+    int dx = std::abs(static_cast<int>(x2) - static_cast<int>(x1));
+    int dy = -std::abs(static_cast<int>(y2) - static_cast<int>(y1));
+    int sx = x1 < x2 ? 1 : -1;
+    int sy = y1 < y2 ? 1 : -1;
+    int err = dx + dy;
+
+    while (true) {
+        setPixel(x1, y1, r, g, b);
+        if (x1 == x2 && y1 == y2) break;
+        int e2 = 2 * err;
+        if (e2 >= dy) { err += dy; x1 += sx; }
+        if (e2 <= dx) { err += dx; y1 += sy; }
     }
 }
 

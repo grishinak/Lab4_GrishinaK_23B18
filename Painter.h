@@ -35,5 +35,8 @@ private:
 public:
     Painter(std::uint32_t width, std::uint32_t height);
     void setPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b);
+    void drawCircle(int x, int y, std::uint8_t r, std::uint8_t g, std::uint8_t b);
+    void drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2,
+                       std::uint8_t r, std::uint8_t g, std::uint8_t b);
     void save(const std::string& filename);
 };

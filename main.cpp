@@ -30,6 +30,9 @@ int main() {
         }
     }
 
+painter.drawCircle(50,50,0,0,255);
+painter.drawLine(50,50,100,100,0,0,0);
+
     painter.save("output.bmp");
 
     std::cout << "Image saved successfully!\n";
