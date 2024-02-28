@@ -1,3 +1,6 @@
+#ifndef PAINTER_H
+#define PAINTER_H
+
 #pragma once
 
 #include <iostream>
@@ -43,3 +46,5 @@ public:
     void drawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b); 
     
 };
+
+#endif // PAINTER_H

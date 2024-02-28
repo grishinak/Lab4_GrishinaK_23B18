@@ -1,5 +1,5 @@
-#ifndef INPUTREADER_HPP
-#define INPUTREADER_HPP
+#ifndef INPUTREADER_H
+#define INPUTREADER_H
 
 #include <iostream>
 #include <fstream>
@@ -17,4 +17,4 @@ public: //методы класса
     std::vector<std::pair<int, int>> getEdges();  //вернуть пары связанных вершин
 };
 
-#endif // INPUTREADER_HPP
+#endif // INPUTREADER_H

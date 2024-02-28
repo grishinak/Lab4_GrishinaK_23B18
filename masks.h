@@ -1,3 +1,6 @@
+#ifndef MASKS_H
+#define MASKS_H
+
 #include <vector> 
 
 // masks for digits
@@ -152,3 +155,5 @@ std::vector<std::vector<int>> mask0 = {
         {0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
         {0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0}
 };
+
+#endif // MASKS_H
