@@ -4,6 +4,7 @@
 #include "Painter.h"
 
 
+
 int main() {
 
     /* //inputreader test */
@@ -33,7 +34,7 @@ int main() {
 painter.drawCircle(50,50,0,0,255);
 painter.drawLine(50,50,100,100,0,0,0);
 
-painter.drawDigitOne(150,50,0,255,0);
+painter.drawDigitOne(150,50,0,0,255);
 
     painter.save("output.bmp");
 

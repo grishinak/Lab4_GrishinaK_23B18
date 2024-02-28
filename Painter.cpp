@@ -1,5 +1,7 @@
 #include "Painter.h"
 #include <cmath>
+#include <vector>
+#include <algorithm>
 
 Painter::Painter(std::uint32_t width, std::uint32_t height) {
     header.type = 0x4D42; // "BM"
@@ -72,14 +74,56 @@ void Painter::save(const std::string& filename) {
     file.close();
 }
 
-void Painter::drawDigitOne(int startX, int startY, uint8_t r, uint8_t g, uint8_t b) {
-    // Coordinates for the vertical line of digit 1
-    int x = startX + 6;
-    int y1 = startY + 1;
-    int y2 = startY + 11;
+void Painter::drawDigitOne(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+    // Маска для перевернутой по горизонтали единицы (12x12):
+    std::vector<std::vector<int>> mask = {
+        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
 
-    // Draw the vertical line
-    for (int y = y1; y <= y2; ++y) {
-        setPixel(x, y, r, g, b);
+    // Лямбда-выражение для поворота массива на 180 градусов
+auto rotateArray180Degrees = [](std::vector<std::vector<int>>& arr) {
+    int rows = arr.size();
+    int cols = arr[0].size();
+    for (int i = 0; i < rows / 2; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::swap(arr[i][j], arr[rows - 1 - i][cols - 1 - j]);
+        }
+    }
+};
+
+    // Отражаем маску по горизонтали
+    rotateArray180Degrees(mask);
+
+// Лямбда-выражение для разворачивания порядка элементов в каждой строке массива // y axis
+auto reverseRows = [](std::vector<std::vector<int>>& arr) {
+    for (auto& row : arr) {
+        std::reverse(row.begin(), row.end());
+    }
+};
+
+reverseRows(mask);
+    
+    // Применяем маску к изображению, начиная с позиции (x, y)
+    for (size_t i = 0; i < mask.size(); ++i) {
+        for (size_t j = 0; j < mask[i].size(); ++j) {
+            if (mask[i][j] == 1) {
+                // Проверяем, не выходим ли за границы изображения
+                if (x + j < header.width && y + i < header.height) {
+                    // Устанавливаем пиксель с цветом (r, g, b)
+                    setPixel(x + j, y + i, r, g, b);
+                }
+            }
+        }
     }
 }
