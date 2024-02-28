@@ -1,5 +1,7 @@
 #include "Painter.h"
 #include <cmath>
+#include <vector>
+#include <algorithm>
 
 Painter::Painter(std::uint32_t width, std::uint32_t height) {
     header.type = 0x4D42; // "BM"
@@ -70,4 +72,44 @@ void Painter::save(const std::string& filename) {
     file.write(reinterpret_cast<char*>(pixels.data()), pixels.size());
 
     file.close();
+}
+
+void Painter::drawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+    
+    // Лямбда-выражение для поворота массива на 180 градусов
+    auto rotateArray180Degrees = [](std::vector<std::vector<int>>& arr) {
+        int rows = arr.size();
+        int cols = arr[0].size();
+        for (int i = 0; i < rows / 2; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                std::swap(arr[i][j], arr[rows - 1 - i][cols - 1 - j]);
+            }
+        }
+    };
+
+    // Отражаем маску по горизонтали
+    std::vector<std::vector<int>> maskCopy = mask;
+    rotateArray180Degrees(maskCopy);
+
+    // Лямбда-выражение для разворачивания порядка элементов в каждой строке массива // y axis
+    auto reverseRows = [](std::vector<int>& row) {
+        std::reverse(row.begin(), row.end());
+    };
+
+    for (auto& row : maskCopy) {
+        reverseRows(row);
+    }
+    
+    // Применяем маску к изображению, начиная с позиции (x, y)
+    for (size_t i = 0; i < maskCopy.size(); ++i) {
+        for (size_t j = 0; j < maskCopy[i].size(); ++j) {
+            if (maskCopy[i][j] == 1) {
+                // Проверяем, не выходим ли за границы изображения
+                if (x + j < header.width && y + i < header.height) {
+                    // Устанавливаем пиксель с цветом (r, g, b)
+                    setPixel(x + j, y + i, r, g, b);
+                }
+            }
+        }
+    }
 }
