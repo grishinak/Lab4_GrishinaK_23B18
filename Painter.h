@@ -39,4 +39,5 @@ public:
     void drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2,
                        std::uint8_t r, std::uint8_t g, std::uint8_t b);
     void save(const std::string& filename);
+    void drawDigitOne(int startX, int startY, uint8_t r, uint8_t g, uint8_t b);
 };

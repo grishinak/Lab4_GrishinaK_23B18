@@ -71,3 +71,15 @@ void Painter::save(const std::string& filename) {
 
     file.close();
 }
+
+void Painter::drawDigitOne(int startX, int startY, uint8_t r, uint8_t g, uint8_t b) {
+    // Coordinates for the vertical line of digit 1
+    int x = startX + 6;
+    int y1 = startY + 1;
+    int y2 = startY + 11;
+
+    // Draw the vertical line
+    for (int y = y1; y <= y2; ++y) {
+        setPixel(x, y, r, g, b);
+    }
+}
