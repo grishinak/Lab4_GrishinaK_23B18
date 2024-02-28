@@ -36,7 +36,7 @@ painter.drawCircle(50,50,0,0,255);
 painter.drawLine(50,50,100,100,0,0,0);
 
 
-    painter.drawDigit(mask5,300,40,0,144,144);
+    painter.drawDigit(mask5,150,150,0,144,144);
 
     painter.save("output.bmp");
 
