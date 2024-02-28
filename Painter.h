@@ -39,5 +39,7 @@ public:
     void drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2,
                        std::uint8_t r, std::uint8_t g, std::uint8_t b);
     void save(const std::string& filename);
-    void drawDigitOne(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b);
+
+    void drawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b); 
+    
 };
