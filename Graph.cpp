@@ -74,3 +74,15 @@ void Graph::printPositions() {
         std::cout << "Node " << i << ": (" << positions[i].x << ", " << positions[i].y << ")" << std::endl;
     }
 }
+
+int Graph::getV(){
+    return V;
+}
+
+Point Graph::getPosition(int index) {
+    if (index >=0 && index<=V) {
+        return positions[index];
+    } //else {
+       // return {0,0};
+  //  }
+}
