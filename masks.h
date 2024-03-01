@@ -3,7 +3,8 @@
 
 #include <vector> 
 
-// masks for digits
+// masks for digits 12*12
+//commented 2 lines in each mask to get 10*10, because of font requirement of 12 fontsize
  
 std::vector<std::vector<int>> mask1 = {
         {0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0},

@@ -37,6 +37,7 @@ int main() {
     graph.printPositions();// вывели координаты вершин 
 //all printed out from graph
 
+    /* painter test*/
     Painter painter(2000, 2000);
  
         //draw vertices
@@ -45,10 +46,10 @@ int main() {
         painter.drawCircle(point.x, point.y, 255, 0, 0);
     }
 
-//draw edges
-drawEdges(graph, painter, 255, 0, 0);
+        //draw edges
+    drawEdges(graph, painter, 255, 0, 0);
 
-    //draw numbers of vertices
+        //draw numbers of vertices
     for (int i=0; i < graph.getV();++i){ 
     Point point = graph.getPosition(i);
         if (i<10) {
@@ -77,32 +78,9 @@ drawEdges(graph, painter, 255, 0, 0);
         }
 
     }
-        
-   
-
+        //saving output file     
     painter.save("output.bmp");
     std::cout << "Image saved successfully!\n";
-
-    /* //Painter test */
-
- /*  Painter painter(800, 600);
-
-    // Draw something (e.g., a red rectangle)
-    for (int x = 100; x < 300; ++x) {
-        for (int y = 100; y < 300; ++y) {
-            painter.setPixel(x, y, 255, 0, 0); // Red
-        }
-    }
-
-painter.drawCircle(50,50,0,0,255);
-painter.drawLine(50,50,100,100,0,0,0);
-
-
-    painter.drawDigit(mask5,150,150,0,144,144);
-
-    painter.save("output.bmp");
-
-    std::cout << "Image saved successfully!\n";*/  
 
     return 0;
 }
