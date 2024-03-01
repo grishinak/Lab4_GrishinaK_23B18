@@ -29,7 +29,7 @@ int main() {
     graph.printPositions();// вывели координаты вершин 
 //all printed out from graph
 
-    Painter painter(1000, 1000);
+    Painter painter(2000, 2000);
  
     for (int i = 0; i < graph.getV(); ++i) {
         Point point = graph.getPosition(i);

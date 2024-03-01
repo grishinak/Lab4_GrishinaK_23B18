@@ -56,18 +56,34 @@ void Graph::addEdges( std::vector<std::pair<int, int>>& edges) {
 }
 
 void Graph::planarize() {
-    // Initialize positions randomly
+    // Инициализируем позиции случайным образом, но с учетом ограничения на минимальное расстояние
     for (int i = 0; i < V; ++i) {
-        positions[i].x = rand() % 1000;
-        positions[i].y = rand() % 1000;
+        bool validPosition = false;
+        while (!validPosition) {
+            // Генерируем случайные координаты
+            positions[i].x = rand() % 2000;
+            positions[i].y = rand() % 2000;
+            
+            // Проверяем расстояние между текущей вершиной и предыдущими вершинами
+            validPosition = true;
+            for (int j = 0; j < i; ++j) {
+                if (distance(positions[i], positions[j]) < 30+5+5) // 30 по условию между вершинами и 5 радиус вершин
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+        }
     }
     
-    // Perform iterations
+    // Выполняем итерации
     for (int iter = 0; iter < 100; ++iter) {
         repelNodes();
         adjustSpringForces();
     }
 }
+    
+
 
 void Graph::printPositions() {
     for (int i = 0; i < V; ++i) {
@@ -82,7 +98,7 @@ int Graph::getV(){
 Point Graph::getPosition(int index) {
     if (index >=0 && index<=V) {
         return positions[index];
-    } //else {
-       // return {0,0};
-  //  }
+    } else {
+        return {0,0};
+    }
 }
