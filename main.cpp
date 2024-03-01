@@ -4,6 +4,7 @@
 #include "Painter.h"
 #include "masks.h"
 
+#include "Graph.h"
 
 
 int main() {
@@ -20,10 +21,19 @@ int main() {
     for (const auto& edge : edges) {
         std::cout << edge.first << " " << edge.second << std::endl;
     }//вывод пар вершин, связанных ребром
+// all printed out from inputreader
+
+    /*graph test*/
+    Graph graph(V);
+    graph.addEdges(edges);//добавили считанные ребра из ввода
+    graph.planarize();//планаризовали по силам
+    graph.printPositions();// вывели координаты вершин 
+//all printed out from graph
+
 
     /* //Painter test */
 
-    Painter painter(800, 600);
+ /*  Painter painter(800, 600);
 
     // Draw something (e.g., a red rectangle)
     for (int x = 100; x < 300; ++x) {
@@ -36,11 +46,11 @@ painter.drawCircle(50,50,0,0,255);
 painter.drawLine(50,50,100,100,0,0,0);
 
 
-    painter.drawDigit(mask5,300,40,0,144,144);
+    painter.drawDigit(mask5,150,150,0,144,144);
 
     painter.save("output.bmp");
 
-    std::cout << "Image saved successfully!\n";
+    std::cout << "Image saved successfully!\n";*/  
 
     return 0;
 }
