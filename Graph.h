@@ -28,6 +28,8 @@ public:
     void addEdges( std::vector<std::pair<int, int>>& edges);
     void planarize();
     void printPositions();
+    int getV();
+    Point getPosition(int index);
 };
 
 #endif // GRAPH_H

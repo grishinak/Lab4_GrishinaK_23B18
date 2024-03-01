@@ -3,7 +3,6 @@
 #include "InputReader.h"
 #include "Painter.h"
 #include "masks.h"
-
 #include "Graph.h"
 
 
@@ -30,6 +29,15 @@ int main() {
     graph.printPositions();// вывели координаты вершин 
 //all printed out from graph
 
+    Painter painter(1000, 1000);
+ 
+    for (int i = 0; i < graph.getV(); ++i) {
+        Point point = graph.getPosition(i);
+        painter.drawCircle(point.x, point.y, 255, 0, 0);
+    }
+
+    painter.save("output.bmp");
+    std::cout << "Image saved successfully!\n";
 
     /* //Painter test */
 
