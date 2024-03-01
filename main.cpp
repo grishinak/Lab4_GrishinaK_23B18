@@ -31,10 +31,45 @@ int main() {
 
     Painter painter(2000, 2000);
  
+        //draw vertices
     for (int i = 0; i < graph.getV(); ++i) {
         Point point = graph.getPosition(i);
         painter.drawCircle(point.x, point.y, 255, 0, 0);
     }
+
+
+
+    //draw numbers of vertices
+    for (int i=0; i < graph.getV();++i){ 
+    Point point = graph.getPosition(i);
+        if (i<10) {
+            painter.drawDigit(masks[i%10] ,point.x-5, point.y-17, 255, 0, 0);
+        } else if (i<100){
+            int units =i%10;
+            int tens=i/10;
+            painter.drawDigit(masks[units%10] ,point.x-5, point.y-17, 255, 0, 0);
+            painter.drawDigit(masks[tens%10] ,point.x-15, point.y-17, 255, 0, 0);
+        } else if (i<1000) {
+            int units =i%10;
+            int tens=(i/10)%10;
+            int hundreds=((i/10)/10)%10;
+            painter.drawDigit(masks[units%10] ,point.x-5, point.y-17, 255, 0, 0);
+            painter.drawDigit(masks[tens%10] ,point.x-15, point.y-17, 255, 0, 0);
+            painter.drawDigit(masks[hundreds%10] ,point.x-25, point.y-17, 255, 0, 0);
+        }else if (i<1000) {
+            int units =i%10;
+            int tens=(i/10)%10;
+            int hundreds=((i/10)/10)%10;
+            int thousands=(((i/10)/10)/10)%10;
+            painter.drawDigit(masks[units%10] ,point.x-5, point.y-17, 255, 0, 0);
+            painter.drawDigit(masks[tens%10] ,point.x-15, point.y-17, 255, 0, 0);
+            painter.drawDigit(masks[hundreds%10] ,point.x-25, point.y-17, 255, 0, 0);
+            painter.drawDigit(masks[thousands%10] ,point.x-35, point.y-17, 255, 0, 0);
+        }
+
+    }
+        
+   
 
     painter.save("output.bmp");
     std::cout << "Image saved successfully!\n";
