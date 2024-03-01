@@ -40,15 +40,16 @@ int main() {
     /* painter test*/
     Painter painter(2000, 2000);
  
-        //draw vertices
+   
+
+        //draw edges
+    drawEdges(graph, painter, 0, 0, 255);
+    
+     //draw vertices
     for (int i = 0; i < graph.getV(); ++i) {
         Point point = graph.getPosition(i);
         painter.drawCircle(point.x, point.y, 255, 0, 0);
     }
-
-        //draw edges
-    drawEdges(graph, painter, 0, 0, 255);
-
         //draw numbers of vertices
     for (int i=0; i < graph.getV();++i){ 
     Point point = graph.getPosition(i);

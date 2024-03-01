@@ -45,6 +45,31 @@ void Painter::drawCircle(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
         }
     }
 
+    void Painter::DrawLoop(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+    // Рисуем петлю из точки (x, y) в ту же самую точку (x, y)
+    const int radius = 8; // Радиус петли
+    const int centerX = x+(radius+3);
+    const int centerY = y+(radius+3);
+
+    // Рисуем внешний круг петли
+    for (int i = 0; i < 360; ++i) {
+        double angle = i * M_PI / 180.0;
+        int xCoord = centerX + static_cast<int>(radius * std::cos(angle));
+        int yCoord = centerY + static_cast<int>(radius * std::sin(angle));
+        drawCircle(xCoord, yCoord, r, g, b);
+    }
+
+    // Рисуем внутренний круг петли
+    const int innerRadius = radius-1; // Радиус внутреннего круга петли
+    for (int i = 0; i < 360; ++i) {
+        double angle = i * M_PI / 180.0;
+        int xCoord = centerX + static_cast<int>(innerRadius * std::cos(angle));
+        int yCoord = centerY + static_cast<int>(innerRadius * std::sin(angle));
+        drawCircle(xCoord, yCoord, 255, 255, 255);
+    }
+}
+
+
 void Painter::drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2,
                        std::uint8_t r, std::uint8_t g, std::uint8_t b) {
     int dx = std::abs(static_cast<int>(x2) - static_cast<int>(x1));
@@ -53,9 +78,13 @@ void Painter::drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std
     int sy = y1 < y2 ? 1 : -1;
     int err = dx + dy;
 
+   if ( x1==x2 && y1==y2)
+       {DrawLoop(x1,y1,0, 255,0);}//рисуем петлю радиусом 8 если соединяемые точки совпадают
+
+
     while (true) {
         setPixel(x1, y1, r, g, b);
-        if (x1 == x2 && y1 == y2) break;
+        if (x1 == x2 && y1 == y2) {break;}
         int e2 = 2 * err;
         if (e2 >= dy) { err += dy; x1 += sx; }
         if (e2 <= dx) { err += dx; y1 += sy; }
