@@ -52,15 +52,15 @@ int main() {
         } else if (i<1000) {
             int units =i%10;
             int tens=(i/10)%10;
-            int hundreds=((i/10)/10)%10;
+            int hundreds=i/100;
             painter.drawDigit(masks[units%10] ,point.x-5, point.y-17, 255, 0, 0);
             painter.drawDigit(masks[tens%10] ,point.x-15, point.y-17, 255, 0, 0);
             painter.drawDigit(masks[hundreds%10] ,point.x-25, point.y-17, 255, 0, 0);
-        }else if (i<1000) {
+        }else if (i<10000) {
             int units =i%10;
             int tens=(i/10)%10;
-            int hundreds=((i/10)/10)%10;
-            int thousands=(((i/10)/10)/10)%10;
+            int hundreds=(i/100)%10;
+            int thousands=i/1000;
             painter.drawDigit(masks[units%10] ,point.x-5, point.y-17, 255, 0, 0);
             painter.drawDigit(masks[tens%10] ,point.x-15, point.y-17, 255, 0, 0);
             painter.drawDigit(masks[hundreds%10] ,point.x-25, point.y-17, 255, 0, 0);
