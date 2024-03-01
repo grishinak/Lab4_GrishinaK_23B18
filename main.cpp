@@ -6,6 +6,14 @@
 #include "Graph.h"
 
 
+void drawEdges(Graph& graph, Painter& painter, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+    for (const auto& edge : graph.edges) {
+        Point p1 = graph.getPosition(edge.first);
+        Point p2 = graph.getPosition(edge.second);
+        painter.drawLine(p1.x, p1.y, p2.x, p2.y, r, g, b);
+    }
+}
+
 int main() {
 
     /* //inputreader test */
@@ -29,6 +37,7 @@ int main() {
     graph.printPositions();// вывели координаты вершин 
 //all printed out from graph
 
+    /* painter test*/
     Painter painter(2000, 2000);
  
         //draw vertices
@@ -37,9 +46,10 @@ int main() {
         painter.drawCircle(point.x, point.y, 255, 0, 0);
     }
 
+        //draw edges
+    drawEdges(graph, painter, 255, 0, 0);
 
-
-    //draw numbers of vertices
+        //draw numbers of vertices
     for (int i=0; i < graph.getV();++i){ 
     Point point = graph.getPosition(i);
         if (i<10) {
@@ -68,32 +78,9 @@ int main() {
         }
 
     }
-        
-   
-
+        //saving output file     
     painter.save("output.bmp");
     std::cout << "Image saved successfully!\n";
-
-    /* //Painter test */
-
- /*  Painter painter(800, 600);
-
-    // Draw something (e.g., a red rectangle)
-    for (int x = 100; x < 300; ++x) {
-        for (int y = 100; y < 300; ++y) {
-            painter.setPixel(x, y, 255, 0, 0); // Red
-        }
-    }
-
-painter.drawCircle(50,50,0,0,255);
-painter.drawLine(50,50,100,100,0,0,0);
-
-
-    painter.drawDigit(mask5,150,150,0,144,144);
-
-    painter.save("output.bmp");
-
-    std::cout << "Image saved successfully!\n";*/  
 
     return 0;
 }
