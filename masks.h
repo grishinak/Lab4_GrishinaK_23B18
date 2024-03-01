@@ -156,4 +156,9 @@ std::vector<std::vector<int>> mask0 = {
         {0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0}
 };
 
+std::vector<std::vector<std::vector<int>>> masks = {
+mask0, mask1, mask2, mask3, mask4, mask5, mask6, mask7, mask8, mask9 
+};
+
+
 #endif // MASKS_H
