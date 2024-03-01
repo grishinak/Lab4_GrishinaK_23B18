@@ -48,3 +48,14 @@ int main() {
     generateGraph(V, E);
     return 0;
 }
+
+
+/* //for tree
+
+5 4
+0 1
+0 2
+0 3
+1 4
+
+ */
