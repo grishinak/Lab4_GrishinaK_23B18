@@ -73,8 +73,6 @@ int main() {
     /* painter test*/
     Painter painter(2000, 2000);
  
-   
-
         //draw edges
     drawEdges(graph, painter, 0, 0, 255);
 
