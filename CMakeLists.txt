@@ -9,4 +9,5 @@ add_executable(Proj
 main.cpp 
 InputReader.cpp
 Painter.cpp
-Graph.cpp)
+Graph.cpp
+functions.cpp)
