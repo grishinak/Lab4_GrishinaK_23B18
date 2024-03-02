@@ -5,7 +5,7 @@
 #include "masks.h"
 #include "Graph.h"
 
-
+void drawVertices(Graph& graph, Painter& painter);
 void drawEdges(Graph& graph, Painter& painter, std::uint8_t r, std::uint8_t g, std::uint8_t b);
 void drawVertexNumbers(Painter& painter,  Graph& graph,  std::vector<std::vector<std::vector<int>>>& masks) ;
 
@@ -38,11 +38,8 @@ int main() {
         //draw edges
     drawEdges(graph, painter, 0, 0, 255);
 
-     //draw vertices
-    for (int i = 0; i < graph.getV(); ++i) {
-        Point point = graph.getPosition(i);
-        painter.drawCircle(point.x, point.y, 255, 0, 0);
-    }
+    //draw vertices
+    drawVertices(graph, painter);
 
     //draw vertex numbers
     drawVertexNumbers(painter, graph, masks);
@@ -53,6 +50,13 @@ int main() {
     std::cout << "Image saved successfully!\n";
 
     return 0;
+}
+
+void drawVertices(Graph& graph, Painter& painter){
+for (int i = 0; i < graph.getV(); ++i) {
+    Point point = graph.getPosition(i);
+    painter.drawCircle(point.x, point.y, 255, 0, 0);
+    }
 }
 
 void drawEdges(Graph& graph, Painter& painter, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
