@@ -9,10 +9,10 @@ struct Point {
 
 class Graph {
 private:
-    int V;
-    std::vector<std::vector<int>> adj;
-    std::vector<Point> positions;
-    const int k = 1; // Spring constant
+    int V_;
+    std::vector<std::vector<int>> adj_;
+    std::vector<Point> positions_;
+    const int kspring_ = 1; // Spring constant
     
     double distance(const Point& p1, const Point& p2);
     void applyForce(Point& p1, Point& p2);

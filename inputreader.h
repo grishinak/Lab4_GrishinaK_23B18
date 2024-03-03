@@ -7,8 +7,8 @@
 
 class InputReader {
 private: //поля класса 
-    int V, E;
-    std::vector<std::pair<int, int>> edges;
+    int V_, E_;
+    std::vector<std::pair<int, int>> edges_;
 
 public: //методы класса
     InputReader();
