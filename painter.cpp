@@ -4,15 +4,15 @@
 #include <vector>
 #include <algorithm>
 
-Painter::Painter(std::uint32_t width, std::uint32_t height) {
+Painter::Painter(std::uint32_t _width, std::uint32_t _height) {
     header_.type = 0x4D42; // "BM"
-    header_.size = sizeof(BMPHeader) + width * height * 3;
+    header_.size = sizeof(BMPHeader) + _width * _height * 3;
     header_.reserved1 = 0;
     header_.reserved2 = 0;
     header_.offset = sizeof(BMPHeader);
     header_.header_size = 40;
-    header_.width = width;
-    header_.height = height;
+    header_.width = _width;
+    header_.height = _height;
     header_.planes = 1;
     header_.bit_count = 24; // 24 bits per pixel
     header_.compression = 0;
@@ -22,78 +22,78 @@ Painter::Painter(std::uint32_t width, std::uint32_t height) {
     header_.colors_used = 0;
     header_.colors_important = 0;
 
-    pixels_.resize(width * height * 3, 255); // Initialize with white pixels
+    pixels_.resize(_width * _height * 3, 255); // Initialize with white pixels
 }
 
-void Painter::SetPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
-    if (x < header_.width && y < header_.height) {
-        size_t index = (y * header_.width + x) * 3;
-        pixels_[index] = b;
-        pixels_[index + 1] = g;
-        pixels_[index + 2] = r;
+void Painter::SetPixel(std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
+    if (_x < header_.width && _y < header_.height) {
+        size_t index = (_y * header_.width + _x) * 3;
+        pixels_[index] = _b;
+        pixels_[index + 1] = _g;
+        pixels_[index + 2] = _r;
     }
 }
 
-void Painter::DrawCircle(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
-        const int radius = 5; // половина диаметра
-        for (int i = x - radius; i <= x + radius; ++i) {
-            for (int j = y - radius; j <= y + radius; ++j) {
-                if (std::sqrt((i - x) * (i - x) + (j - y) * (j - y)) <= radius) {
-                    SetPixel(i, j, r, g, b);
+void Painter::DrawCircle(int _x, int _y, uint8_t _r, uint8_t _g, uint8_t _b) {
+        const int kRadius = 5; // половина диаметра
+        for (int i = _x - kRadius; i <= _x + kRadius; ++i) {
+            for (int j = _y - kRadius; j <= _y + kRadius; ++j) {
+                if (std::sqrt((i - _x) * (i - _x) + (j - _y) * (j - _y)) <= kRadius) {
+                    SetPixel(i, j, _r, _g, _b);
                 }
             }
         }
     }
 
-    void Painter::DrawLoop(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+    void Painter::DrawLoop(std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
     // Рисуем петлю из точки (x, y) в ту же самую точку (x, y)
-    const int radius = 8; // Радиус петли
-    const int centerX = x+(radius+3);
-    const int centerY = y+(radius+3);
+    const int kRadius = 8; // Радиус петли
+    const int kCenterX = _x+(kRadius+3);
+    const int kCenterY = _y+(kRadius+3);
 
     // Рисуем внешний круг петли
     for (int i = 0; i < 360; ++i) {
         double angle = i * M_PI / 180.0;
-        int xCoord = centerX + static_cast<int>(radius * std::cos(angle));
-        int yCoord = centerY + static_cast<int>(radius * std::sin(angle));
-        DrawCircle(xCoord, yCoord, r, g, b);
+        int xCoord = kCenterX + static_cast<int>(kRadius * std::cos(angle));
+        int yCoord = kCenterY + static_cast<int>(kRadius * std::sin(angle));
+        DrawCircle(xCoord, yCoord, _r, _g, _b);
     }
 
     // Рисуем внутренний круг петли
-    const int innerRadius = radius-1; // Радиус внутреннего круга петли
+    const int kInnerRadius = kRadius - 1; // Радиус внутреннего круга петли
     for (int i = 0; i < 360; ++i) {
         double angle = i * M_PI / 180.0;
-        int xCoord = centerX + static_cast<int>(innerRadius * std::cos(angle));
-        int yCoord = centerY + static_cast<int>(innerRadius * std::sin(angle));
+        int xCoord = kCenterX + static_cast<int>(kInnerRadius * std::cos(angle));
+        int yCoord = kCenterY + static_cast<int>(kInnerRadius * std::sin(angle));
         DrawCircle(xCoord, yCoord, 255, 255, 255);
     }
 }
 
 
-void Painter::DrawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
-    int dx = std::abs(static_cast<int>(x2) - static_cast<int>(x1));
-    int dy = -std::abs(static_cast<int>(y2) - static_cast<int>(y1));
-    int sx = x1 < x2 ? 1 : -1;
-    int sy = y1 < y2 ? 1 : -1;
+void Painter::DrawLine(std::uint32_t _x1, std::uint32_t _y1, std::uint32_t _x2, std::uint32_t _y2, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
+    int dx = std::abs(static_cast<int>(_x2) - static_cast<int>(_x1));
+    int dy = -std::abs(static_cast<int>(_y2) - static_cast<int>(_y1));
+    int sx = _x1 < _x2 ? 1 : -1;
+    int sy = _y1 < _y2 ? 1 : -1;
     int err = dx + dy;
 
-   if ( x1==x2 && y1==y2)
-       {DrawLoop(x1,y1,0, 255,0);}//рисуем петлю радиусом 8 если соединяемые точки совпадают
+   if ( _x1==_x2 && _y1==_y2)
+       {DrawLoop(_x1,_y1,0, 255,0);}//рисуем петлю радиусом 8 если соединяемые точки совпадают
 
 
     while (true) {
-        SetPixel(x1, y1, r, g, b);
-        if (x1 == x2 && y1 == y2) {break;}
+        SetPixel(_x1, _y1, _r, _g, _b);
+        if (_x1 == _x2 && _y1 == _y2) {break;}
         int e2 = 2 * err;
-        if (e2 >= dy) { err += dy; x1 += sx; }
-        if (e2 <= dx) { err += dx; y1 += sy; }
+        if (e2 >= dy) { err += dy; _x1 += sx; }
+        if (e2 <= dx) { err += dx; _y1 += sy; }
     }
 }
 
-void Painter::Save(const std::string& filename) {
-    std::ofstream file(filename, std::ios::binary);
+void Painter::Save(const std::string& _filename) {
+    std::ofstream file(_filename, std::ios::binary);
     if (!file) {
-        std::cerr << "Error: Couldn't open file " << filename << " for writing\n";
+        std::cerr << "Error: Couldn't open file " << _filename << " for writing\n";
         return;
     }
 
