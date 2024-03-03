@@ -10,5 +10,6 @@ void DrawEdges(Graph& _graph, Painter& _painter, std::uint8_t _r, std::uint8_t _
 
 void DrawVertexNumbers(Painter& _painter,  Graph& _graph,  std::vector<std::vector<std::vector<int>>>& _masks,
     std::uint8_t _r, std::uint8_t _g, std::uint8_t _b);
-
+    
+void PrintEdges(std::vector<std::pair<int, int>> _edges);
 #endif //FUNCTIONS_H

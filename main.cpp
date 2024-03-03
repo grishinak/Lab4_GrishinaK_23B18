@@ -6,12 +6,6 @@
 #include "masks.h"
 #include "functions.h"
 
-void PrintEdges(std::vector<std::pair<int, int>> _edges ) {
-     for (const auto& edge : _edges) {
-        std::cout << edge.first << " " << edge.second << std::endl;
-    }
-}
-
 
 int main() {
 
