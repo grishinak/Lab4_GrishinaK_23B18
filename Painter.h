@@ -1,7 +1,6 @@
 #ifndef PAINTER_H
 #define PAINTER_H
 
-#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -9,7 +8,6 @@
 #include <cstdint>
 #include <string>
 
-#pragma pack(push, 1)
 struct BMPHeader {
     std::uint16_t type;
     std::uint32_t size;
@@ -28,7 +26,7 @@ struct BMPHeader {
     std::uint32_t colors_used;
     std::uint32_t colors_important;
 };
-#pragma pack(pop)
+
 
 class Painter {
 private:
