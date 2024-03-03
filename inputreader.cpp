@@ -17,14 +17,14 @@ InputReader::InputReader() {
     }//ошибка открытия файла 
 }
 
-int InputReader::getV() {
+int InputReader::GetV() {
     return V_;
 } //получить количество вершин
 
-int InputReader::getE() {
+int InputReader::GetE() {
     return E_; //получить количество ребер
 }
 
-std::vector<std::pair<int, int>> InputReader::getEdges() {
+std::vector<std::pair<int, int>> InputReader::GetEdges() {
     return edges_;
 } //получить пары связанных вершин 

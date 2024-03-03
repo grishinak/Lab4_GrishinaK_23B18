@@ -12,9 +12,9 @@ private: //поля класса
 
 public: //методы класса
     InputReader();
-    int getV();  //вернуть количество вершин
-    int getE();  //вернуть количество ребер
-    std::vector<std::pair<int, int>> getEdges();  //вернуть пары связанных вершин
+    int GetV();  //вернуть количество вершин
+    int GetE();  //вернуть количество ребер
+    std::vector<std::pair<int, int>> GetEdges();  //вернуть пары связанных вершин
 };
 
 #endif // INPUTREADER_H
