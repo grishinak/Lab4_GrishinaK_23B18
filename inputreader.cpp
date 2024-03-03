@@ -1,16 +1,16 @@
 #include "inputreader.h"
 
 InputReader::InputReader() {
-    std::ifstream inputFile("input.txt");  // открытие файла с исходными данными
-    if (inputFile.is_open()) //если файл открыт-сохраняем данные 
+    std::ifstream input_file("input.txt");  // открытие файла с исходными данными
+    if (input_file.is_open()) //если файл открыт-сохраняем данные 
     {
-        inputFile >> V_ >> E_; // данные первой строки 
+        input_file >> V_ >> E_; // данные первой строки 
         for (int i = 0; i < E_; ++i) {
             int u, v;
-            inputFile >> u >> v;  //пары связанных вершин ребром
+            input_file >> u >> v;  //пары связанных вершин ребром
             edges_.push_back(std::make_pair(u, v));//сохранение пары
         }
-        inputFile.close();  // закрытие файла
+        input_file.close();  // закрытие файла
     } 
     else {
         std::cerr << "Error opening input file." << std::endl;
