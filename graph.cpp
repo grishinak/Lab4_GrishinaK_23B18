@@ -80,8 +80,6 @@ void Graph::Planarize() {
         AdjustSpringForces();
     }
 }
-    
-
 
 void Graph::PrintPositions() {
     for (int i = 0; i < V_; ++i) {
