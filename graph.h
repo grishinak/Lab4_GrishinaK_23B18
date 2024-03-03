@@ -12,7 +12,6 @@ private:
     int V_;
     std::vector<std::vector<int>> adj_;
     std::vector<Point> positions_;
-    const int kspring_ = 1; // Spring constant
     
     double distance(const Point& p1, const Point& p2);
     void applyForce(Point& p1, Point& p2);
@@ -21,7 +20,7 @@ private:
 
 public:
     std::vector<std::pair<int, int>> edges;
-    
+    const int kspring_ = 1; // Spring constant
     Graph(int V);
     void addEdge(int u, int v);
   //  void addSingleEdge(const std::pair<int, int>& edge);
