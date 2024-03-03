@@ -20,7 +20,7 @@ private:
 
 public:
     std::vector<std::pair<int, int>> edges_;
-    const int kspring_ = 1; // Spring constant
+    const int kSpring_ = 1; // Spring constant
 
     Graph(int _V);
     void AddEdge(int _u, int _v);

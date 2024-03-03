@@ -12,8 +12,8 @@ void Graph::ApplyForce(Point& _p1, Point& _p2) {
     double dx = _p2.x - _p1.x;
     double dy = _p2.y - _p1.y;
     
-    _p1.x += static_cast<int>((dx / dist) * kspring_);
-    _p1.y += static_cast<int>((dy / dist) * kspring_);
+    _p1.x += static_cast<int>((dx / dist) * kSpring_);
+    _p1.y += static_cast<int>((dy / dist) * kSpring_);
 }
 
 void Graph::RepelNodes() {
