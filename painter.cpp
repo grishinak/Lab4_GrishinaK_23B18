@@ -45,7 +45,7 @@ void Painter::DrawCircle(int _x, int _y, uint8_t _r, uint8_t _g, uint8_t _b) {
         }
     }
 
-    void Painter::DrawLoop(std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
+void Painter::DrawLoop(std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
     // Рисуем петлю из точки (x, y) в ту же самую точку (x, y)
     const int kRadius = 8; // Радиус петли
     const int kCenterX = _x+(kRadius+3);
