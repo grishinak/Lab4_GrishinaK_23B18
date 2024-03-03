@@ -59,18 +59,18 @@ void Graph::AddEdges( std::vector<std::pair<int, int>>& _edges_) {
 void Graph::Planarize() {
     // Инициализируем позиции случайным образом, но с учетом ограничения на минимальное расстояние
     for (int i = 0; i < V_; ++i) {
-        bool validPosition = false;
-        while (!validPosition) {
+        bool valid_position = false;
+        while (!valid_position) {
             // Генерируем случайные координаты
             positions_[i].x = rand() % 2000;
             positions_[i].y = rand() % 2000;
             
             // Проверяем расстояние между текущей вершиной и предыдущими вершинами
-            validPosition = true;
+            valid_position = true;
             for (int j = 0; j < i; ++j) {
                 if (Distance(positions_[i], positions_[j]) < 30+5+5) // 30 по условию между вершинами и 5 радиус вершин
                 {
-                    validPosition = false;
+                    valid_position = false;
                     break;
                 }
             }
