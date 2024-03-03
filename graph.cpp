@@ -27,7 +27,7 @@ void Graph::repelNodes() {
 }
 
 void Graph::adjustSpringForces() {
-    for (auto edge : edges) {
+    for (auto edge : edges_) {
         Point& p1 = positions_[edge.first];
         Point& p2 = positions_[edge.second];
         
@@ -43,7 +43,7 @@ Graph::Graph(int V) : V_(V) {
 void Graph::addEdge(int u, int v) {
     adj_[u].push_back(v);
     adj_[v].push_back(u);
-    edges.push_back({u, v});
+    edges_.push_back({u, v});
 }
 
 //void Graph::addSingleEdge(const std::pair<int, int>& edge) {

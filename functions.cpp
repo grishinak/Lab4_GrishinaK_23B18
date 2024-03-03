@@ -8,7 +8,7 @@ for (int i = 0; i < graph.getV(); ++i) {
 }
 
 void drawEdges(Graph& graph, Painter& painter, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
-    for (const auto& edge : graph.edges) {
+    for (const auto& edge : graph.edges_) {
         Point p1 = graph.getPosition(edge.first);
         Point p2 = graph.getPosition(edge.second);
         painter.drawLine(p1.x, p1.y, p2.x, p2.y, r, g, b);

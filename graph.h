@@ -19,12 +19,12 @@ private:
     void adjustSpringForces();
 
 public:
-    std::vector<std::pair<int, int>> edges;
+    std::vector<std::pair<int, int>> edges_;
     const int kspring_ = 1; // Spring constant
     Graph(int V);
     void addEdge(int u, int v);
   //  void addSingleEdge(const std::pair<int, int>& edge);
-    void addEdges( std::vector<std::pair<int, int>>& edges);
+    void addEdges( std::vector<std::pair<int, int>>& edges_);
     void planarize();
     void printPositions();
     int getV();
