@@ -1,4 +1,4 @@
-#include "Painter.h"
+#include "painter.h"
 
 #include <cmath>
 #include <vector>

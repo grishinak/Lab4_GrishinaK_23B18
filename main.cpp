@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "inputreader.h"
-#include "Painter.h"
+#include "painter.h"
 #include "masks.h"
 #include "Graph.h"
 
