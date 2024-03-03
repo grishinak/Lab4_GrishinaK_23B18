@@ -25,7 +25,7 @@ Painter::Painter(std::uint32_t width, std::uint32_t height) {
     pixels_.resize(width * height * 3, 255); // Initialize with white pixels
 }
 
-void Painter::setPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+void Painter::SetPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
     if (x < header_.width && y < header_.height) {
         size_t index = (y * header_.width + x) * 3;
         pixels_[index] = b;
@@ -34,12 +34,12 @@ void Painter::setPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::ui
     }
 }
 
-void Painter::drawCircle(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
+void Painter::DrawCircle(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
         const int radius = 5; // половина диаметра
         for (int i = x - radius; i <= x + radius; ++i) {
             for (int j = y - radius; j <= y + radius; ++j) {
                 if (std::sqrt((i - x) * (i - x) + (j - y) * (j - y)) <= radius) {
-                    setPixel(i, j, r, g, b);
+                    SetPixel(i, j, r, g, b);
                 }
             }
         }
@@ -56,7 +56,7 @@ void Painter::drawCircle(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
         double angle = i * M_PI / 180.0;
         int xCoord = centerX + static_cast<int>(radius * std::cos(angle));
         int yCoord = centerY + static_cast<int>(radius * std::sin(angle));
-        drawCircle(xCoord, yCoord, r, g, b);
+        DrawCircle(xCoord, yCoord, r, g, b);
     }
 
     // Рисуем внутренний круг петли
@@ -65,13 +65,12 @@ void Painter::drawCircle(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
         double angle = i * M_PI / 180.0;
         int xCoord = centerX + static_cast<int>(innerRadius * std::cos(angle));
         int yCoord = centerY + static_cast<int>(innerRadius * std::sin(angle));
-        drawCircle(xCoord, yCoord, 255, 255, 255);
+        DrawCircle(xCoord, yCoord, 255, 255, 255);
     }
 }
 
 
-void Painter::drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2,
-                       std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+void Painter::DrawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std::uint32_t y2, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
     int dx = std::abs(static_cast<int>(x2) - static_cast<int>(x1));
     int dy = -std::abs(static_cast<int>(y2) - static_cast<int>(y1));
     int sx = x1 < x2 ? 1 : -1;
@@ -83,7 +82,7 @@ void Painter::drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std
 
 
     while (true) {
-        setPixel(x1, y1, r, g, b);
+        SetPixel(x1, y1, r, g, b);
         if (x1 == x2 && y1 == y2) {break;}
         int e2 = 2 * err;
         if (e2 >= dy) { err += dy; x1 += sx; }
@@ -91,7 +90,7 @@ void Painter::drawLine(std::uint32_t x1, std::uint32_t y1, std::uint32_t x2, std
     }
 }
 
-void Painter::save(const std::string& filename) {
+void Painter::Save(const std::string& filename) {
     std::ofstream file(filename, std::ios::binary);
     if (!file) {
         std::cerr << "Error: Couldn't open file " << filename << " for writing\n";
@@ -104,7 +103,7 @@ void Painter::save(const std::string& filename) {
     file.close();
 }
 
-void Painter::drawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+void Painter::DrawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
     
     // Лямбда-выражение для поворота массива на 180 градусов
     auto rotateArray180Degrees = [](std::vector<std::vector<int>>& arr) {
@@ -137,7 +136,7 @@ void Painter::drawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t
                 // Проверяем, не выходим ли за границы изображения
                 if (x + j < header_.width && y + i < header_.height) {
                     // Устанавливаем пиксель с цветом (r, g, b)
-                    setPixel(x + j, y + i, r, g, b);
+                    SetPixel(x + j, y + i, r, g, b);
                 }
             }
         }

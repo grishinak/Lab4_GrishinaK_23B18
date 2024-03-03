@@ -43,7 +43,7 @@ int main() {
 
 
         //saving output file     
-    painter.save("output.bmp");
+    painter.Save("output.bmp");
     std::cout << "Image saved successfully!\n";
 
     return 0;
