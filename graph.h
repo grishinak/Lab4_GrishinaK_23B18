@@ -13,22 +13,22 @@ private:
     std::vector<std::vector<int>> adj_;
     std::vector<Point> positions_;
     
-    double distance(const Point& p1, const Point& p2);
-    void applyForce(Point& p1, Point& p2);
-    void repelNodes();
-    void adjustSpringForces();
+    double Distance(const Point& p1, const Point& p2);
+    void ApplyForce(Point& p1, Point& p2);
+    void RepelNodes();
+    void AdjustSpringForces();
 
 public:
     std::vector<std::pair<int, int>> edges_;
     const int kspring_ = 1; // Spring constant
     Graph(int V);
-    void addEdge(int u, int v);
+    void AddEdge(int u, int v);
   //  void addSingleEdge(const std::pair<int, int>& edge);
-    void addEdges( std::vector<std::pair<int, int>>& edges_);
-    void planarize();
-    void printPositions();
-    int getV();
-    Point getPosition(int index);
+    void AddEdges( std::vector<std::pair<int, int>>& edges_);
+    void Planarize();
+    void PrintPositions();
+    int GetV();
+    Point GetPosition(int index);
 };
 
 #endif // GRAPH_H

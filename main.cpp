@@ -24,22 +24,22 @@ int main() {
 
     /*graph test*/
     Graph graph(V);
-    graph.addEdges(edges);//добавили считанные ребра из ввода
-    graph.planarize();//планаризовали по силам
-    graph.printPositions();// вывели координаты вершин 
+    graph.AddEdges(edges);//добавили считанные ребра из ввода
+    graph.Planarize();//планаризовали по силам
+    graph.PrintPositions();// вывели координаты вершин 
 //all printed out from graph
 
     /* painter test*/
     Painter painter(2000, 2000);
  
         //draw edges
-    drawEdges(graph, painter, 0, 0, 255);
+    DrawEdges(graph, painter, 0, 0, 255);
 
     //draw vertices
-    drawVertices(graph, painter, 255,0,0);
+    DrawVertices(graph, painter, 255,0,0);
 
     //draw vertex numbers
-    drawVertexNumbers(painter, graph, masks, 0, 0, 0);
+    DrawVertexNumbers(painter, graph, masks, 0, 0, 0);
 
 
         //saving output file     
