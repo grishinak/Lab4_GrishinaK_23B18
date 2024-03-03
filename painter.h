@@ -9,22 +9,22 @@
 #include <string>
 
 struct BMPHeader {
-    std::uint16_t type_;
-    std::uint32_t size_;
-    std::uint16_t reserved1_;
-    std::uint16_t reserved2_;
-    std::uint32_t offset_;
-    std::uint32_t header_size_;
-    std::uint32_t width_;
-    std::uint32_t height_;
-    std::uint16_t planes_;
-    std::uint16_t bit_count_;
-    std::uint32_t compression_;
-    std::uint32_t image_size_;
-    std::uint32_t x_pixels_per_meter_;
-    std::uint32_t y_pixels_per_meter_;
-    std::uint32_t colors_used_;
-    std::uint32_t colors_important_;
+    std::uint16_t type;
+    std::uint32_t size;
+    std::uint16_t reserved1;
+    std::uint16_t reserved2;
+    std::uint32_t offset;
+    std::uint32_t header_size;
+    std::uint32_t width;
+    std::uint32_t height;
+    std::uint16_t planes;
+    std::uint16_t bit_count;
+    std::uint32_t compression;
+    std::uint32_t image_size;
+    std::uint32_t x_pixels_per_meter;
+    std::uint32_t y_pixels_per_meter;
+    std::uint32_t colors_used;
+    std::uint32_t colors_important;
 };
 
 
