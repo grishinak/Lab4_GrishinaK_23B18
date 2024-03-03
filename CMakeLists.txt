@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11) #
 add_executable(Proj 
 
 main.cpp 
-InputReader.cpp
-Painter.cpp
-Graph.cpp
+inputreader.cpp
+painter.cpp
+graph.cpp
 functions.cpp)
