@@ -3,7 +3,7 @@
 #include "inputreader.h"
 #include "painter.h"
 #include "masks.h"
-#include "Graph.h"
+#include "graph.h"
 
 #include "functions.h"
 
