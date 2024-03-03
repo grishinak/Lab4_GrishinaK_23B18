@@ -54,18 +54,18 @@ void Painter::DrawCircle(int _x, int _y, uint8_t _r, uint8_t _g, uint8_t _b) {
     // Рисуем внешний круг петли
     for (int i = 0; i < 360; ++i) {
         double angle = i * M_PI / 180.0;
-        int xCoord = kCenterX + static_cast<int>(kRadius * std::cos(angle));
-        int yCoord = kCenterY + static_cast<int>(kRadius * std::sin(angle));
-        DrawCircle(xCoord, yCoord, _r, _g, _b);
+        int x_coord = kCenterX + static_cast<int>(kRadius * std::cos(angle));
+        int y_coord = kCenterY + static_cast<int>(kRadius * std::sin(angle));
+        DrawCircle(x_coord, y_coord, _r, _g, _b);
     }
 
     // Рисуем внутренний круг петли
     const int kInnerRadius = kRadius - 1; // Радиус внутреннего круга петли
     for (int i = 0; i < 360; ++i) {
         double angle = i * M_PI / 180.0;
-        int xCoord = kCenterX + static_cast<int>(kInnerRadius * std::cos(angle));
-        int yCoord = kCenterY + static_cast<int>(kInnerRadius * std::sin(angle));
-        DrawCircle(xCoord, yCoord, 255, 255, 255);
+        int x_coord = kCenterX + static_cast<int>(kInnerRadius * std::cos(angle));
+        int y_coord = kCenterY + static_cast<int>(kInnerRadius * std::sin(angle));
+        DrawCircle(x_coord, y_coord, 255, 255, 255);
     }
 }
 
@@ -103,10 +103,10 @@ void Painter::Save(const std::string& _filename) {
     file.close();
 }
 
-void Painter::DrawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+void Painter::DrawDigit(const std::vector<std::vector<int>>& _mask, std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
     
     // Лямбда-выражение для поворота массива на 180 градусов
-    auto rotateArray180Degrees = [](std::vector<std::vector<int>>& arr) {
+    auto rotate_array_180_degrees = [](std::vector<std::vector<int>>& arr) {
         int rows = arr.size();
         int cols = arr[0].size();
         for (int i = 0; i < rows / 2; ++i) {
@@ -117,26 +117,26 @@ void Painter::DrawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t
     };
 
     // Отражаем маску по горизонтали
-    std::vector<std::vector<int>> maskCopy = mask;
-    rotateArray180Degrees(maskCopy);
+    std::vector<std::vector<int>> mask_copy = _mask;
+    rotate_array_180_degrees(mask_copy);
 
     // Лямбда-выражение для разворачивания порядка элементов в каждой строке массива // y axis
-    auto reverseRows = [](std::vector<int>& row) {
+    auto reverse_rows = [](std::vector<int>& row) {
         std::reverse(row.begin(), row.end());
     };
 
-    for (auto& row : maskCopy) {
-        reverseRows(row);
+    for (auto& row : mask_copy) {
+        reverse_rows(row);
     }
     
     // Применяем маску к изображению, начиная с позиции (x, y)
-    for (size_t i = 0; i < maskCopy.size(); ++i) {
-        for (size_t j = 0; j < maskCopy[i].size(); ++j) {
-            if (maskCopy[i][j] == 1) {
+    for (size_t i = 0; i < mask_copy.size(); ++i) {
+        for (size_t j = 0; j < mask_copy[i].size(); ++j) {
+            if (mask_copy[i][j] == 1) {
                 // Проверяем, не выходим ли за границы изображения
-                if (x + j < header_.width && y + i < header_.height) {
+                if (_x + j < header_.width && _y + i < header_.height) {
                     // Устанавливаем пиксель с цветом (r, g, b)
-                    SetPixel(x + j, y + i, r, g, b);
+                    SetPixel(_x + j, _y + i, _r, _g, _b);
                 }
             }
         }

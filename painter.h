@@ -34,13 +34,13 @@ private:
     std::vector<std::uint8_t> pixels_;
 
 public:
-    Painter(std::uint32_t width, std::uint32_t height);
-    void SetPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b);
-    void DrawCircle(int x, int y, std::uint8_t r, std::uint8_t g, std::uint8_t b);
+    Painter(std::uint32_t _width, std::uint32_t _height);
+    void SetPixel(std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b);
+    void DrawCircle(int _x, int _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b);
     void DrawLine(std::uint32_t _x1, std::uint32_t _y1, std::uint32_t _x2, std::uint32_t _y2, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b);
     void Save(const std::string& _filename);
-    void DrawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b); 
-    void DrawLoop(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b);
+    void DrawDigit(const std::vector<std::vector<int>>& _mask, std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b); 
+    void DrawLoop(std::uint32_t _x, std::uint32_t _y, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b);
 };
 
 #endif // PAINTER_H
