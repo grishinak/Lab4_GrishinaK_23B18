@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "InputReader.h"
+#include "inputreader.h"
 #include "Painter.h"
 #include "masks.h"
 #include "Graph.h"
