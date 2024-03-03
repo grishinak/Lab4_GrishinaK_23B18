@@ -3,17 +3,17 @@
 #include <iostream>
 #include <cmath>
 
-double Graph::Distance(const Point& p1, const Point& p2) {
-    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+double Graph::Distance(const Point& _p1, const Point& _p2) {
+    return sqrt(pow(_p1.x - _p2.x, 2) + pow(_p1.y - _p2.y, 2));
 }
 
-void Graph::ApplyForce(Point& p1, Point& p2) {
-    double dist = Distance(p1, p2);
-    double dx = p2.x - p1.x;
-    double dy = p2.y - p1.y;
+void Graph::ApplyForce(Point& _p1, Point& _p2) {
+    double dist = Distance(_p1, _p2);
+    double dx = _p2.x - _p1.x;
+    double dy = _p2.y - _p1.y;
     
-    p1.x += static_cast<int>((dx / dist) * kspring_);
-    p1.y += static_cast<int>((dy / dist) * kspring_);
+    _p1.x += static_cast<int>((dx / dist) * kspring_);
+    _p1.y += static_cast<int>((dy / dist) * kspring_);
 }
 
 void Graph::RepelNodes() {
@@ -35,23 +35,23 @@ void Graph::AdjustSpringForces() {
     }
 }
 
-Graph::Graph(int V) : V_(V) {
-    adj_.resize(V);
-    positions_.resize(V);
+Graph::Graph(int _V) : V_(_V) {
+    adj_.resize(_V);
+    positions_.resize(_V);
 }
 
-void Graph::AddEdge(int u, int v) {
-    adj_[u].push_back(v);
-    adj_[v].push_back(u);
-    edges_.push_back({u, v});
+void Graph::AddEdge(int _u, int _v) {
+    adj_[_u].push_back(_v);
+    adj_[_v].push_back(_u);
+    edges_.push_back({_u, _v});
 }
 
 //void Graph::addSingleEdge(const std::pair<int, int>& edge) {
 //    addEdge(edge.first, edge.second);
 //}
 
-void Graph::AddEdges( std::vector<std::pair<int, int>>& edges) {
-    for (const auto& edge : edges) {
+void Graph::AddEdges( std::vector<std::pair<int, int>>& _edges_) {
+    for (const auto& edge : _edges_) {
         AddEdge(edge.first, edge.second);
     }
 }
@@ -96,9 +96,9 @@ int Graph::GetV(){
     return V_;
 }
 
-Point Graph::GetPosition(int index) {
-    if (index >=0 && index<=V_) {
-        return positions_[index];
+Point Graph::GetPosition(int _index) {
+    if (_index >=0 && _index<=V_) {
+        return positions_[_index];
     } else {
         return {0,0};
     }
