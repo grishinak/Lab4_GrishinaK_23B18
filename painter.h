@@ -30,8 +30,8 @@ struct BMPHeader {
 
 class Painter {
 private:
-    BMPHeader header;
-    std::vector<std::uint8_t> pixels;
+    BMPHeader header_;
+    std::vector<std::uint8_t> pixels_;
 
 public:
     Painter(std::uint32_t width, std::uint32_t height);
