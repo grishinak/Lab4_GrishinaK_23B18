@@ -2,9 +2,8 @@
 
 #include "inputreader.h"
 #include "painter.h"
-#include "masks.h"
 #include "graph.h"
-
+#include "masks.h"
 #include "functions.h"
 
 int main() {
