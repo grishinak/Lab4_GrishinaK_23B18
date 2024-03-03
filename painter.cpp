@@ -5,29 +5,29 @@
 #include <algorithm>
 
 Painter::Painter(std::uint32_t width, std::uint32_t height) {
-    header.type = 0x4D42; // "BM"
-    header.size = sizeof(BMPHeader) + width * height * 3;
-    header.reserved1 = 0;
-    header.reserved2 = 0;
-    header.offset = sizeof(BMPHeader);
-    header.header_size = 40;
-    header.width = width;
-    header.height = height;
-    header.planes = 1;
-    header.bit_count = 24; // 24 bits per pixel
-    header.compression = 0;
-    header.image_size = 0;
-    header.x_pixels_per_meter = 0;
-    header.y_pixels_per_meter = 0;
-    header.colors_used = 0;
-    header.colors_important = 0;
+    header.type_ = 0x4D42; // "BM"
+    header.size_ = sizeof(BMPHeader) + width * height * 3;
+    header.reserved1_ = 0;
+    header.reserved2_ = 0;
+    header.offset_ = sizeof(BMPHeader);
+    header.header_size_ = 40;
+    header.width_ = width;
+    header.height_ = height;
+    header.planes_ = 1;
+    header.bit_count_ = 24; // 24 bits per pixel
+    header.compression_ = 0;
+    header.image_size_ = 0;
+    header.x_pixels_per_meter_ = 0;
+    header.y_pixels_per_meter_ = 0;
+    header.colors_used_ = 0;
+    header.colors_important_ = 0;
 
     pixels.resize(width * height * 3, 255); // Initialize with white pixels
 }
 
 void Painter::setPixel(std::uint32_t x, std::uint32_t y, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
-    if (x < header.width && y < header.height) {
-        size_t index = (y * header.width + x) * 3;
+    if (x < header.width_ && y < header.height_) {
+        size_t index = (y * header.width_ + x) * 3;
         pixels[index] = b;
         pixels[index + 1] = g;
         pixels[index + 2] = r;
@@ -135,7 +135,7 @@ void Painter::drawDigit(const std::vector<std::vector<int>>& mask, std::uint32_t
         for (size_t j = 0; j < maskCopy[i].size(); ++j) {
             if (maskCopy[i][j] == 1) {
                 // Проверяем, не выходим ли за границы изображения
-                if (x + j < header.width && y + i < header.height) {
+                if (x + j < header.width_ && y + i < header.height_) {
                     // Устанавливаем пиксель с цветом (r, g, b)
                     setPixel(x + j, y + i, r, g, b);
                 }
