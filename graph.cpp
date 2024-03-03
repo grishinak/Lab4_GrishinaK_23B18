@@ -46,9 +46,6 @@ void Graph::AddEdge(int _u, int _v) {
     edges_.push_back({_u, _v});
 }
 
-//void Graph::addSingleEdge(const std::pair<int, int>& edge) {
-//    addEdge(edge.first, edge.second);
-//}
 
 void Graph::AddEdges( std::vector<std::pair<int, int>>& _edges_) {
     for (const auto& edge : _edges_) {

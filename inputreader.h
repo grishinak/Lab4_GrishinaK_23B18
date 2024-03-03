@@ -6,11 +6,11 @@
 #include <vector>
 
 class InputReader {
-private: //поля класса 
+private:
     int V_, E_;
     std::vector<std::pair<int, int>> edges_;
 
-public: //методы класса
+public:
     InputReader();
     int GetV();  //вернуть количество вершин
     int GetE();  //вернуть количество ребер

@@ -24,7 +24,6 @@ public:
 
     Graph(int _V);
     void AddEdge(int _u, int _v);
-  //  void addSingleEdge(const std::pair<int, int>& edge);
     void AddEdges( std::vector<std::pair<int, int>>& _edges_);
     void Planarize();
     void PrintPositions();
