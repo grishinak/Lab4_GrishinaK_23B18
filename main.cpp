@@ -21,7 +21,7 @@ int main() {
 
     Graph graph(V);
     graph.AddEdges(edges);//добавили считанные ребра из ввода
-    graph.Planarize();//планаризовали по силам
+    graph.FRPlanarize();//планаризовали по силам с помощью алгоритма Фейхтермана-Рейнгольдса(1-ый вариант)
     graph.PrintPositions();// вывели координаты вершин 
 
 
