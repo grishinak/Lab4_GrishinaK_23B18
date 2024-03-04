@@ -30,8 +30,8 @@ private:
     static constexpr int kIterations = 100;
 
     // Члены данных для констант алгоритма FRPlanarize()
-    double repulsiveForceFactor_ = kInitialRepulsiveForceFactor;
-    double springForceFactor_ = kInitialSpringForceFactor;
+    double repulsive_force_factor_ = kInitialRepulsiveForceFactor;
+    double spring_force_factor_ = kInitialSpringForceFactor;
 
 
 public:

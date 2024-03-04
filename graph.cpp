@@ -123,7 +123,7 @@ void Graph::FRPlanarize() {
                     double dx = positions_[j].x - positions_[i].x;
                     double dy = positions_[j].y - positions_[i].y;
                     double distance = std::max(sqrt(dx * dx + dy * dy), 0.0001); // Избегаем деления на ноль
-                    double force = repulsiveForceFactor_ / distance;
+                    double force = repulsive_force_factor_ / distance;
                     forces[i].x -= force * dx / distance;
                     forces[i].y -= force * dy / distance;
                 }
@@ -137,7 +137,7 @@ void Graph::FRPlanarize() {
             double dx = positions_[v].x - positions_[u].x;
             double dy = positions_[v].y - positions_[u].y;
             double distance = std::max(sqrt(dx * dx + dy * dy), 0.0001); // Избегаем деления на ноль
-            double force = springForceFactor_ * (distance - kIdealEdgeLength);
+            double force = spring_force_factor_ * (distance - kIdealEdgeLength);
             forces[u].x += force * dx / distance;
             forces[u].y += force * dy / distance;
             forces[v].x -= force * dx / distance;
@@ -151,8 +151,8 @@ void Graph::FRPlanarize() {
         }
 
         // Охлаждение системы
-        repulsiveForceFactor_ *= kCoolingFactor;
-        springForceFactor_ *= kCoolingFactor;
+        repulsive_force_factor_ *= kCoolingFactor;
+        spring_force_factor_ *= kCoolingFactor;
     }
 
     // Приведение позиций к типу int
