@@ -18,12 +18,10 @@ int main() {
     std::cout << "Number of edges: " << E << std::endl;//вывод числа ребер
     PrintEdges(edges);//вывод пар вершин, связанных ребром
 
-
     Graph graph(V);
     graph.AddEdges(edges);//добавили считанные ребра из ввода
-    graph.FRPlanarize();//планаризовали по силам с помощью алгоритма Фейхтермана-Рейнгольдса(1-ый вариант)
+    graph.FRPlanarize();//планаризовали по силам с помощью алгоритма (1) FRPlanarise() или (2)Planarize() 
     graph.PrintPositions();// вывели координаты вершин 
-
 
     Painter painter(2000, 2000);
     DrawEdges(graph, painter, 0, 0, 255);
