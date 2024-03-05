@@ -26,6 +26,11 @@ void GenerateGraph(int _V, int _E) {
     while (edges.size() < _E) {
         int u = dis(gen); // Случайная вершина u
         int v = dis(gen); // Случайная вершина v
+        // Проверяем, что ребро (u, v) еще не добавлено и не является петлей (u == v)
+        // А также проверяем, что обратное ребро (v, u) отсутствует
+        if (u != v && edges.find({u, v}) == edges.end() && edges.find({v, u}) == edges.end()) {
+            edges.insert({u, v}); // Добавляем ребро (u, v)
+        }
     }
 
     // Выводим сгенерированные ребра
