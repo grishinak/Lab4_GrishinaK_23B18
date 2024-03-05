@@ -56,6 +56,7 @@ void Graph::AddEdges( std::vector<std::pair<int, int>>& _edges_) {
 }
 
 void Graph::Planarize() {
+        srand(time(NULL));
     // Инициализируем позиции случайным образом, но с учетом ограничения на минимальное расстояние
     for (int i = 0; i < V_; ++i) {
         bool valid_position = false;
@@ -105,6 +106,7 @@ Point Graph::GetPosition(int _index) {
 
 
 void Graph::FRPlanarize() {
+    srand(time(NULL));
 
     // Инициализация случайных позиций вершин
     for (int i = 0; i < V_; ++i) {
