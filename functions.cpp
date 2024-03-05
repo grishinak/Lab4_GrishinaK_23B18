@@ -1,50 +1,56 @@
 #include "functions.h"
 
-void drawVertices(Graph& graph, Painter& painter,std::uint8_t r, std::uint8_t g, std::uint8_t b){
-for (int i = 0; i < graph.getV(); ++i) {
-    Point point = graph.getPosition(i);
-    painter.drawCircle(point.x, point.y, r, g, b);
+void DrawVertices(Graph& _graph, Painter& _painter,std::uint8_t _r, std::uint8_t _g, std::uint8_t _b){
+for (int i = 0; i < _graph.GetV(); ++i) {
+    Point point = _graph.GetPosition(i);
+    _painter.DrawCircle(point.x, point.y, _r, _g, _b);
     }
 }
 
-void drawEdges(Graph& graph, Painter& painter, std::uint8_t r, std::uint8_t g, std::uint8_t b) {
-    for (const auto& edge : graph.edges) {
-        Point p1 = graph.getPosition(edge.first);
-        Point p2 = graph.getPosition(edge.second);
-        painter.drawLine(p1.x, p1.y, p2.x, p2.y, r, g, b);
+void DrawEdges(Graph& _graph, Painter& _painter, std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
+    for (const auto& edge : _graph.edges_) {
+        Point p1 = _graph.GetPosition(edge.first);
+        Point p2 = _graph.GetPosition(edge.second);
+        _painter.DrawLine(p1.x, p1.y, p2.x, p2.y, _r, _g, _b);
     }
 }
 
-void drawVertexNumbers(Painter& painter,  Graph& graph,  std::vector<std::vector<std::vector<int>>>& masks,
-std::uint8_t r, std::uint8_t g, std::uint8_t b) {
+void DrawVertexNumbers(Painter& _painter,  Graph& _graph,  std::vector<std::vector<std::vector<int>>>& _masks,
+    std::uint8_t _r, std::uint8_t _g, std::uint8_t _b) {
     // Проходим по каждой вершине графа
-    for (int i = 0; i < graph.getV(); ++i) { 
-        Point point = graph.getPosition(i); // Получаем позицию вершины
+    for (int i = 0; i < _graph.GetV(); ++i) { 
+        Point point = _graph.GetPosition(i); // Получаем позицию вершины
         
         // Рассматриваем различные случаи для отображения номера вершины
         if (i < 10) {
-            painter.drawDigit(masks[i % 10], point.x - 5, point.y - 17, r, g, b);
+            _painter.DrawDigit(_masks[i % 10], point.x - 5, point.y - 17, _r, _g, _b);
         } else if (i < 100) {
             int units = i % 10;
             int tens = i / 10;
-            painter.drawDigit(masks[units % 10], point.x - 5, point.y - 17, r, g, b);
-            painter.drawDigit(masks[tens % 10], point.x - 15, point.y - 17, r, g, b);
+            _painter.DrawDigit(_masks[units % 10], point.x - 5, point.y - 17, _r, _g, _b);
+            _painter.DrawDigit(_masks[tens % 10], point.x - 15, point.y - 17, _r, _g, _b);
         } else if (i < 1000) {
             int units = i % 10;
             int tens = (i / 10) % 10;
             int hundreds = i / 100;
-            painter.drawDigit(masks[units % 10], point.x - 5, point.y - 17, r, g, b);
-            painter.drawDigit(masks[tens % 10], point.x - 15, point.y - 17, r, g, b);
-            painter.drawDigit(masks[hundreds % 10], point.x - 25, point.y - 17, r, g, b);
+            _painter.DrawDigit(_masks[units % 10], point.x - 5, point.y - 17, _r, _g, _b);
+            _painter.DrawDigit(_masks[tens % 10], point.x - 15, point.y - 17, _r, _g, _b);
+            _painter.DrawDigit(_masks[hundreds % 10], point.x - 25, point.y - 17, _r, _g, _b);
         } else if (i < 10000) {
             int units = i % 10;
             int tens = (i / 10) % 10;
             int hundreds = (i / 100) % 10;
             int thousands = i / 1000;
-            painter.drawDigit(masks[units % 10], point.x - 5, point.y - 17, r, g, b);
-            painter.drawDigit(masks[tens % 10], point.x - 15, point.y - 17, r, g, b);
-            painter.drawDigit(masks[hundreds % 10], point.x - 25, point.y - 17, r, g, b);
-            painter.drawDigit(masks[thousands % 10], point.x - 35, point.y - 17, r, g, b);
+            _painter.DrawDigit(_masks[units % 10], point.x - 5, point.y - 17, _r, _g, _b);
+            _painter.DrawDigit(_masks[tens % 10], point.x - 15, point.y - 17, _r, _g, _b);
+            _painter.DrawDigit(_masks[hundreds % 10], point.x - 25, point.y - 17, _r, _g, _b);
+            _painter.DrawDigit(_masks[thousands % 10], point.x - 35, point.y - 17, _r, _g, _b);
         }
+    }
+}
+
+void PrintEdges(std::vector<std::pair<int, int>> _edges) {
+     for (const auto& edge : _edges) {
+        std::cout << edge.first << " " << edge.second << std::endl;
     }
 }
