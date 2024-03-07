@@ -55,15 +55,15 @@ void Graph::AddEdges( std::vector<std::pair<int, int>>& _edges_) {
     }
 }
 
-void Graph::Planarize() {
+void Graph::Planarize(int _height, int _weight) {
         srand(time(NULL));
     // Инициализируем позиции случайным образом, но с учетом ограничения на минимальное расстояние
     for (int i = 0; i < V_; ++i) {
         bool valid_position = false;
         while (!valid_position) {
             // Генерируем случайные координаты
-            positions_[i].x = rand() % 2000;
-            positions_[i].y = rand() % 2000;
+            positions_[i].x = rand() % _height;
+            positions_[i].y = rand() % _weight;
             
             // Проверяем расстояние между текущей вершиной и предыдущими вершинами
             valid_position = true;
@@ -105,13 +105,13 @@ Point Graph::GetPosition(int _index) {
 }
 
 
-void Graph::FRPlanarize() {
+void Graph::FRPlanarize(int _height,int _weight) {
     srand(time(NULL));
 
     // Инициализация случайных позиций вершин
     for (int i = 0; i < V_; ++i) {
-        positions_[i].x = rand() % 2000; // Примерный размер поля для случайной инициализации //2000 - painter parameters by constructor
-        positions_[i].y = rand() % 2000; // Примерный размер поля для случайной инициализации //2000 - painter parameters by constructor
+        positions_[i].x = rand() % _height; // Примерный размер поля для случайной инициализации //2000 - painter parameters by constructor
+        positions_[i].y = rand() % _weight; // Примерный размер поля для случайной инициализации //2000 - painter parameters by constructor
     }
 
     // Итеративный процесс для планаризации графа

@@ -44,8 +44,8 @@ public:
     int GetV();
     Point GetPosition(int _index);
 
-    void Planarize();
-    void FRPlanarize();
+    void Planarize(int _height, int _weight);
+    void FRPlanarize(int _height,int _weight);
 };
 
 #endif // GRAPH_H
