@@ -18,8 +18,8 @@ int main() {
     std::cout << "Number of edges: " << E << std::endl;//вывод числа ребер
     PrintEdges(edges);//вывод пар вершин, связанных ребром
 
-    int height = 2000;
-    int weight = 2000;
+    int height = 1000;
+    int weight = 1000;
 
     Graph graph(V);
     graph.AddEdges(edges);//добавили считанные ребра из ввода
