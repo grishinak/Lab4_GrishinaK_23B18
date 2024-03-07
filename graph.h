@@ -26,7 +26,7 @@ private:
     static constexpr double kInitialRepulsiveForceFactor = 0.1;
     static constexpr double kInitialSpringForceFactor = 0.01;
     static constexpr double kCoolingFactor = 0.95;
-    static constexpr double kIdealEdgeLength = 50.0;
+    static constexpr double kIdealEdgeLength = 30.0;
     static constexpr int kIterations = 100;
 
     // Члены данных для констант алгоритма FRPlanarize()

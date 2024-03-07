@@ -11,3 +11,7 @@ inputreader.cpp
 painter.cpp
 graph.cpp
 functions.cpp)
+
+#add_executable(generator
+
+#graphgenerator.cpp)
