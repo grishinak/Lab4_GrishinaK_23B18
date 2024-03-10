@@ -12,16 +12,18 @@ This project is aimed at visualizing graphs using force-directed algorithms. It 
 
 ## Usage
 
-1. Compile the project using C++ compiler.
+1. Compile the project using C++ compiler via cmake by these commands in terminal.
+    1) cmake ..
+    2) make 
 2. Run the compiled executable.
-3. Provide input graph data:
+3. Provide input graph data in input.txt in the project directory with this structure:
    - Number of vertices (V)
    - Number of edges (E)
-   - Pairs of vertices connected by edges
+   - |E| strings of pairs of vertices connected by edges
 4. The program will output:
-   - Number of vertices and edges.
-   - List of vertex pairs connected by edges.
-   - Coordinates of vertices after force-directed planarization.
+   - Number of vertices and edges in terminal.
+   - List of vertex pairs connected by edges in terminal.
+   - Coordinates of vertices after force-directed planarization in terminal.
 5. The generated image will be saved as "output.bmp" in the project directory.
 
 ## Code Overview
