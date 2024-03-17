@@ -5,6 +5,13 @@
 #include <fstream>
 #include <vector>
 
+struct WrongEdgeException {
+
+    WrongEdgeException(int u){
+    }
+    int u;
+};
+
 class InputReader {
 private:
     int V_, E_;

@@ -1,10 +1,8 @@
 #include "inputreader.h"
 
-struct WrongEdgeException {
-    int u;
-};
 
 InputReader::InputReader() {
+//try{    
     std::ifstream input_file("input.txt");  // открытие файла с исходными данными
     if (input_file.is_open()) //если файл открыт-сохраняем данные 
     {
@@ -13,15 +11,19 @@ InputReader::InputReader() {
             int u, v;
             input_file >> u >> v;  //пары связанных вершин ребром
             if ((u < 0 || u >= V_) || (v < 0 || v >= V_)) {
-                throw WrongEdgeException();
-                }
+                throw WrongEdgeException(u);
+                }else
             edges_.push_back(std::make_pair(u, v));//сохранение пары
         }
         input_file.close();  // закрытие файла
     } 
     else {
         std::cerr << "Error opening input file." << std::endl;
-    }//ошибка открытия файла 
+    }//ошибка открытия файла }
+
+//} catch (const WrongEdgeException& ex){
+//  std::cerr<<"Wrong edge exception"<<std::endl;
+//}
 }
 
 int InputReader::GetV() {
