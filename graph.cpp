@@ -104,27 +104,40 @@ Point Graph::GetPosition(int _index) {
     }
 }
 
+bool linesIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+    double ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+    double ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+    if (ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1) {
+        double x_intersect = x1 + ua * (x2 - x1);
+        double y_intersect = y1 + ua * (y2 - y1);
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        double length = sqrt(dx * dx + dy * dy);
+        return length >= 100.0; // Check if length is at least 30 pixels
+    }
+    return false;
+}
 
 void Graph::FRPlanarize(int _height,int _weight) {
     srand(time(NULL));
 
-    // Инициализация случайных позиций вершин
+    // Initialize random vertex positions
     for (int i = 0; i < V_; ++i) {
-        positions_[i].x = rand() % _height; // Примерный размер поля для случайной инициализации //2000 - painter parameters by constructor
-        positions_[i].y = rand() % _weight; // Примерный размер поля для случайной инициализации //2000 - painter parameters by constructor
+        positions_[i].x = rand() % _height;
+        positions_[i].y = rand() % _weight;
     }
 
-    // Итеративный процесс для планаризации графа
+    // Iterative process for graph planarization
     for (int iter = 0; iter < kIterations; ++iter) {
         std::vector<Point> forces(V_, {0, 0});
 
-        // Расчет отталкивающих сил между вершинами
+        // Calculate repulsive forces between vertices
         for (int i = 0; i < V_; ++i) {
             for (int j = 0; j < V_; ++j) {
                 if (i != j) {
                     double dx = positions_[j].x - positions_[i].x;
                     double dy = positions_[j].y - positions_[i].y;
-                    double distance = std::max(sqrt(dx * dx + dy * dy), 0.0001); // Избегаем деления на ноль
+                    double distance = std::max(sqrt(dx * dx + dy * dy), 0.0001);
                     double force = repulsive_force_factor_ / distance;
                     forces[i].x -= force * dx / distance;
                     forces[i].y -= force * dy / distance;
@@ -132,13 +145,13 @@ void Graph::FRPlanarize(int _height,int _weight) {
             }
         }
 
-        // Расчет притягивающих сил для ребер
+        // Calculate attractive forces for edges
         for (const auto& edge : edges_) {
             int u = edge.first;
             int v = edge.second;
             double dx = positions_[v].x - positions_[u].x;
             double dy = positions_[v].y - positions_[u].y;
-            double distance = std::max(sqrt(dx * dx + dy * dy), 0.0001); // Избегаем деления на ноль
+            double distance = std::max(sqrt(dx * dx + dy * dy), 0.0001);
             double force = spring_force_factor_ * (distance - kIdealEdgeLength);
             forces[u].x += force * dx / distance;
             forces[u].y += force * dy / distance;
@@ -146,18 +159,55 @@ void Graph::FRPlanarize(int _height,int _weight) {
             forces[v].y -= force * dy / distance;
         }
 
-        // Обновление позиций вершин с учетом сил
+        // Update vertex positions considering forces
         for (int i = 0; i < V_; ++i) {
             positions_[i].x += forces[i].x;
             positions_[i].y += forces[i].y;
         }
 
-        // Охлаждение системы
+        // Check for edge intersections and adjust vertex positions
+        for (const auto& edge1 : edges_) {
+            int u1 = edge1.first;
+            int v1 = edge1.second;
+            for (const auto& edge2 : edges_) {
+                int u2 = edge2.first;
+                int v2 = edge2.second;
+                if (u1 != u2 && u1 != v2 && v1 != u2 && v1 != v2) {
+                    // Check for intersection between edge1 and edge2
+                    double x1 = positions_[u1].x;
+                    double y1 = positions_[u1].y;
+                    double x2 = positions_[v1].x;
+                    double y2 = positions_[v1].y;
+                    double x3 = positions_[u2].x;
+                    double y3 = positions_[u2].y;
+                    double x4 = positions_[v2].x;
+                    double y4 = positions_[v2].y;
+                    if (linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4)) {
+                        // If intersection found, adjust positions
+                        double dx = x2 - x1;
+                        double dy = y2 - y1;
+                        double length = sqrt(dx * dx + dy * dy);
+                        double ex = dx / length;
+                        double ey = dy / length;
+                        double nx = ey;
+                        double ny = -ex;
+                        double px = (x1 + x2) / 2;
+                        double py = (y1 + y2) / 2;
+                        positions_[v1].x = px + nx * kIdealEdgeLength / 2;
+                        positions_[v1].y = py + ny * kIdealEdgeLength / 2;
+                        positions_[u2].x = px - nx * kIdealEdgeLength / 2;
+                        positions_[u2].y = py - ny * kIdealEdgeLength / 2;
+                    }
+                }
+            }
+        }
+
+        // Cool down the system
         repulsive_force_factor_ *= kCoolingFactor;
         spring_force_factor_ *= kCoolingFactor;
     }
 
-    // Приведение позиций к типу int
+    // Convert positions to integer type
     for (int i = 0; i < V_; ++i) {
         positions_[i].x = static_cast<int>(positions_[i].x);
         positions_[i].y = static_cast<int>(positions_[i].y);
