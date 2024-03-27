@@ -12,17 +12,20 @@ int main() {
     InputReader reader;
     int V = reader.GetV();//сохранение числа вершин
     int E = reader.GetE();//сохранение числа ребер
+
     std::vector<std::pair<int, int>> edges = reader.GetEdges();//сохранение пар вершин, связанных ребром
 
     std::cout << "Number of vertices: " << V << std::endl;//вывод числа вершин
     std::cout << "Number of edges: " << E << std::endl;//вывод числа ребер
     PrintEdges(edges);//вывод пар вершин, связанных ребром
 
-    int height = 2000;
-    int weight = 2000;
+    int height = 1000;
+    int weight = 1000;
 
     Graph graph(V);
+
     graph.AddEdges(edges);//добавили считанные ребра из ввода
+
     graph.FRPlanarize(height, weight);//планаризовали по силам с помощью алгоритма (1) FRPlanarise() или (2)Planarize() 
     graph.PrintPositions();// вывели координаты вершин 
 
@@ -35,4 +38,5 @@ int main() {
     std::cout << "Image saved successfully!\n";
 
     return 0;
+
 }
